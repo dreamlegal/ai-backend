@@ -7,7 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import openai
 from compatibility_test import check_compatibility
-
+from utils import extract_json_from_string  
+from fastapi.responses import JSONResponse
 # Load environment variables
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -31,18 +32,16 @@ async def chat_endpoint(messages: dict):
 
     product_profile = messages['product_profile']
     user_profile = messages['user_profile']
-    print(f"Received messages: {messages}")
     if not messages or not isinstance(messages, dict):
         return {"error": "Invalid message format. Message must be a non-empty string."}
     
     try:
-        print(f"Received message: {messages}")
         # Process the message with OpenAI
         response = await get_openai_response(product_profile, user_profile, messages)
+        response_json= extract_json_from_string(str(response))
         # Return the response
-        return {"response": response}
+        return JSONResponse(content={"response": response_json})
     except Exception as e:
-        print(f"Error: {e}")
         return {"error": "An error occurred while processing your message"}
     
 @app.post("/compatibility")
@@ -67,30 +66,25 @@ async def compatibility_endpoint(user_profile: dict, product_profile: dict):
         response = check_compatibility(product_profile, user_profile)
         return {"response": response}
     except Exception as e:
-        print(f"Error: {e}")
         return {"error": "An error occurred while processing your request"}
 
 async def get_openai_response(product_profile: dict, user_profile: dict, messages: dict) -> str:
-    print(f"Received messages: {messages}")
     try:
 
         # Convert messages to list if it's not already
-        print(f"Messages type: {type(messages)}")
         # Validate messages format
 
         # set system context messages
         system_messages = [
-            {"role": "system", "content": "You are a helpful assistant that helps users find the best product/software/solution for their needs."},
+            {"role": "system", "content": "You are a helpful assistant that helps users find the best product/software/solution for their needs and return only json format with message and suggestive_questions as keys."},
             {"role": "system", "content": f"Product profile: {json.dumps(product_profile)}"},
             {"role": "system", "content": f"User profile: {json.dumps(user_profile)}"},
-
+            {"role": "system", "content": f"Also give suggestive questions that user can ask about product profile based on the product profile and user profile in  clean json format: with message and suggestive_questions as keys based on previous conversation the suggesive questions should be based only on user or product profile"},
         ]
 
         # add system messages to the beginning of the messages list
-        print(f"System messages: {system_messages}")
         messages['messages'] = system_messages + messages['messages']
 
-        print(f"Sending messages to OpenAI: {messages['messages']}")
         response = openai.chat.completions.create(
             model="gpt-4",  # or "gpt-3.5-turbo"
             messages=messages['messages'],
@@ -102,7 +96,6 @@ async def get_openai_response(product_profile: dict, user_profile: dict, message
         answer = response.choices[0].message.content.strip()
         return answer
     except Exception as e:
-        print(f"OpenAI API error: {e}")
         return "Sorry, I couldn't process that."
 
 if __name__ == "__main__":
