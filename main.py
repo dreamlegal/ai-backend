@@ -9,6 +9,7 @@ import openai
 from compatibility_test import check_compatibility
 from utils import extract_json_from_string  
 from fastapi.responses import JSONResponse
+from utils import SAMPLE_REPORT
 # Load environment variables
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -68,6 +69,35 @@ async def compatibility_endpoint(user_profile: dict, product_profile: dict):
     except Exception as e:
         return {"error": "An error occurred while processing your request"}
 
+
+
+
+workflow_report_json = {}
+
+@app.post("/workflow_report")
+# workflow report
+async def workflow_report(workflow_report: dict):
+    try:
+
+        # workflow report
+        messages = [
+            {"role": "system", "content": f"Here is the sample report: {SAMPLE_REPORT}"},
+            {"role": "user", "content": f"Here is the workflow report in json format captured from legal operation team: {workflow_report} You are a legal operation expert who analyzes the workflow with heads like current status,current losses, red flags ,green flags, , possibilities of automation, possibilities of efficiency, scope of improvement, future steps.  use the metrics and numbers to make the report more accurate and meaningful. IMPORTANT: return the report in json format"}
+        ]
+        response = openai.chat.completions.create(
+            model="gpt-4o",  # or "gpt-3.5-turbo"
+            messages=messages,
+        )
+
+
+        html_response = response.choices[0].message.content.strip()
+
+        return JSONResponse(content={"response": extract_json_from_string(html_response)})
+    except Exception as e:
+        return {"error": "An error occurred while processing your request"}
+
+
+
 async def get_openai_response(product_profile: dict, user_profile: dict, messages: dict) -> str:
     try:
 
@@ -88,15 +118,15 @@ async def get_openai_response(product_profile: dict, user_profile: dict, message
         response = openai.chat.completions.create(
             model="gpt-4",  # or "gpt-3.5-turbo"
             messages=messages['messages'],
-            max_tokens=150,
-            n=1,
             stop=None,
-            temperature=0.7,
         )
         answer = response.choices[0].message.content.strip()
         return answer
     except Exception as e:
         return "Sorry, I couldn't process that."
+    
+
+
 
 if __name__ == "__main__":
     import uvicorn
