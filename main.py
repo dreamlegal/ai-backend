@@ -74,6 +74,46 @@ async def compatibility_endpoint(user_profile: dict, product_profile: dict):
 
 workflow_report_json = {}
 
+IMPORTANT_POINTS="""    
+Analyze the workflow report in JSON format provided by the legal operations team. You are a legal operations expert tasked with providing a comprehensive analysis of the workflow. Your report should include the following sections and adhere to the format provided. Use metrics and numbers to make the analysis meaningful and actionable. Return the report in JSON format.
+Structure of the Report
+
+    Current Observation
+        Provide two paragraphs of approximately 150 words each. Include objective measures along with insights into team structure, technical analysis, and other relevant observations.
+
+    Quantitative Analysis of Lost Opportunities
+        Highlight relative opportunities lost with numerical and comparative analysis.
+
+    Red Flags
+        Identify 2 to 6 key issues as subheadings, each followed by a concise explanation based on your analysis.
+
+    Green Flags
+        Identify 2 to 6 key positive points as subheadings, each followed by a concise explanation based on your analysis.
+
+    Assumable Issues
+        List 3 to 7 possible issues, each with a brief explanation based on the workflow and analysis.
+
+    Potential Wins
+        Highlight 2 to 6 actionable wins that can be achieved through workflow optimization.
+
+    Recommendations and Solutions
+        Provide 4 to 8 recommendations, each as a subheading followed by a clear explanation.
+
+    Scope of Improvement
+        Outline 4 to 8 areas for improvement, with subheadings and corresponding explanations.
+
+    Future Steps
+        Define a one-month, three-month, and six-month implementation plan for achieving the recommendations.
+
+    Monitoring Metrics
+        Identify 3 to 7 metrics that should be tracked, with an explanation of their significance.
+
+    Neutral Observations
+        The report should not be biased towards criticism or praise. It should be objective and provide a balanced view of the workflow.
+    Summary
+        Provide a concise conclusion summarizing the overall analysis
+"""
+
 @app.post("/workflow_report")
 # workflow report
 async def workflow_report(workflow_report: dict):
@@ -82,6 +122,7 @@ async def workflow_report(workflow_report: dict):
         # workflow report
         messages = [
             {"role": "system", "content": f"Here is the sample report: {SAMPLE_REPORT}"},
+            {"role": "system", "content": IMPORTANT_POINTS},
             {"role": "user", "content": f"Here is the workflow report in json format captured from legal operation team: {workflow_report} You are a legal operation expert who analyzes the workflow with heads like current status,current losses, red flags ,green flags, , possibilities of automation, possibilities of efficiency, scope of improvement, future steps.  use the metrics and numbers to make the report more accurate and meaningful. IMPORTANT: return the report in json format"}
         ]
         response = openai.chat.completions.create(
