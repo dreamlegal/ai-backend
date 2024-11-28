@@ -75,43 +75,66 @@ async def compatibility_endpoint(user_profile: dict, product_profile: dict):
 workflow_report_json = {}
 
 IMPORTANT_POINTS="""    
-Analyze the workflow report in JSON format provided by the legal operations team. You are a legal operations expert tasked with providing a comprehensive analysis of the workflow. Your report should include the following sections and adhere to the format provided. Use metrics and numbers to make the analysis meaningful and actionable. Return the report in JSON format.
-Structure of the Report
+<role>Legal Operations Expert</role>
 
-    Current Observation
-        Provide two paragraphs of approximately 150 words each. Include objective measures along with insights into team structure, technical analysis, and other relevant observations.
+<objective>Analyze the provided workflow report in JSON format and deliver a comprehensive analysis with actionable insights.</objective>
 
-    Quantitative Analysis of Lost Opportunities
-        Highlight relative opportunities lost with numerical and comparative analysis.
+<output_format>JSON</output_format>
 
-    Red Flags
-        Identify 2 to 6 key issues as subheadings, each followed by a concise explanation based on your analysis.
+<required_sections>
+- Current Observation (2 x 150 word paragraphs)
+  * Team structure analysis
+  * Technical workflow assessment
+  * Key performance metrics
+  * Resource utilization insights
+  
+- Quantitative Analysis
+  * Lost opportunities with numerical data
+  * Comparative performance metrics
+  * Financial impact assessment
+  
+- Risk Assessment
+  * 2-6 critical red flags with explanations
+  * 2-6 positive green flags with evidence
+  * 3-7 potential risks with mitigation strategies
+  
+- Optimization Opportunities  
+  * 2-6 actionable workflow improvements
+  * Expected impact metrics
+  * Implementation complexity rating
+  
+- Strategic Recommendations
+  * 4-8 detailed solutions
+  * Cost-benefit analysis
+  * Priority levels
+  * Resource requirements
+  
+- Implementation Roadmap
+  * 30/60/90 day action plans
+  * Key milestones
+  * Success criteria
+  * Resource allocation
+  
+- Performance Tracking
+  * 3-7 KPIs with baselines
+  * Measurement methodology
+  * Target thresholds
+  
+- Executive Summary
+  * Overall assessment
+  * Critical findings
+  * Strategic direction
+</required_sections>
 
-    Green Flags
-        Identify 2 to 6 key positive points as subheadings, each followed by a concise explanation based on your analysis.
-
-    Assumable Issues
-        List 3 to 7 possible issues, each with a brief explanation based on the workflow and analysis.
-
-    Potential Wins
-        Highlight 2 to 6 actionable wins that can be achieved through workflow optimization.
-
-    Recommendations and Solutions
-        Provide 4 to 8 recommendations, each as a subheading followed by a clear explanation.
-
-    Scope of Improvement
-        Outline 4 to 8 areas for improvement, with subheadings and corresponding explanations.
-
-    Future Steps
-        Define a one-month, three-month, and six-month implementation plan for achieving the recommendations.
-
-    Monitoring Metrics
-        Identify 3 to 7 metrics that should be tracked, with an explanation of their significance.
-
-    Neutral Observations
-        The report should not be biased towards criticism or praise. It should be objective and provide a balanced view of the workflow.
-    Summary
-        Provide a concise conclusion summarizing the overall analysis
+<guidelines>
+- Use specific metrics and quantitative data
+- Provide detailed analysis, not just summaries
+- Make recommendations actionable and measurable
+- Include implementation complexity and priority
+- Support all points with data-driven evidence
+- Maintain dynamic/flexible section structure
+- Focus on business impact and ROI
+</guidelines>
 """
 
 @app.post("/workflow_report")
