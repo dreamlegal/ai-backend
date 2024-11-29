@@ -134,6 +134,8 @@ IMPORTANT_POINTS="""
 - Support all points with data-driven evidence
 - Maintain dynamic/flexible section structure
 - Focus on business impact and ROI
+- The report should be descriptive every heading should have atleast 300 words and subheadings should have atleast 200 words
+- in total the report should be atleast 1500 words
 </guidelines>
 """
 
