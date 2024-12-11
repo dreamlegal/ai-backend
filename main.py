@@ -136,7 +136,71 @@ IMPORTANT_POINTS="""
 - Focus on business impact and ROI
 - The report should be descriptive every heading should have atleast 300 words and subheadings should have atleast 200 words
 - in total the report should be atleast 1500 words
-- IMPORTANT: Use two levels of headings only - heading and subheading and then content or points as list items.
+- IMPORTANT: Create Report in the following json format only :@~Anurag Shakya 
+{
+  "Current Observation": {
+
+    "heading here ": "content here ",//n number of times as required and  no subheadings 
+
+  },
+  "Quantitative Analysis": {
+    "heading here ": "content here ", //n number of times as required and  no subheadings 
+   
+    
+  },
+  "Risk Assessment": {
+    "Critical Red Flags": [
+    //   n number of points as required ..  no heading and no subheadings
+    ],
+    "Positive Green Flags": [
+      //   n number of points as required ..  no heading and no subheadings
+    ],
+    "Potential Risks with Mitigation Strategies": [
+      {
+        "Risk": "//content here ",
+        "Mitigation": "//content here "
+
+      },// repeat this n number of times as required no strucutal change in way of represeting informaton 
+     
+    ]
+  },
+  "Optimization Opportunities": {
+    "Actionable Workflow Improvements": [
+     //   n number of points as required ..  no heading and no subheadings
+    ],
+    "Expected Impact Metrics": "//content here ",
+    "Implementation Complexity Rating": "//content here "
+  },
+  "Strategic Recommendations": {
+    "Detailed Solutions": [
+        //   n number of  points as required ..  no heading and no subheadings
+    ],
+    "Cost-benefit Analysis": "//content here",
+    "Priority Levels": "//content here",
+    "Resource Requirements": "//content here"
+  },
+
+  "Implementation Roadmap": {
+    "30 Day Action Plan": "//content here",
+    "60 Day Action Plan": "//content here",
+    "90 Day Action Plan": "//content here",
+    "Key Milestones": "//content here",
+    "Success Criteria": "//content here",
+    "Resource Allocation": "//content here"
+  },
+  "Performance Tracking": {
+    "KPIs with Baselines": [
+       //   n number of points as required ..  no heading and no subheadings
+    ],
+    "Measurement Methodology": "//content here ",
+    "Target Thresholds": "//content here ."
+  },
+  "Executive Summary": {
+    "Overall Assessment": "//content here .",
+    "Critical Findings": "//content here .",
+    "Strategic Direction": "//content here ."
+  }
+}
 </guidelines>
 """
 
