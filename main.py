@@ -136,6 +136,7 @@ IMPORTANT_POINTS="""
 - Focus on business impact and ROI
 - The report should be descriptive every heading should have atleast 300 words and subheadings should have atleast 200 words
 - in total the report should be atleast 1500 words
+- IMPORTANT: Use two levels of headings only - heading and subheading and then content or points as list items.
 </guidelines>
 """
 
