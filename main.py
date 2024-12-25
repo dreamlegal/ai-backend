@@ -10,6 +10,8 @@ from compatibility_test import check_compatibility
 from utils import extract_json_from_string  
 from fastapi.responses import JSONResponse
 from utils import SAMPLE_REPORT
+from prompts import feature_analysis_prompt
+from pydantic import BaseModel
 # Load environment variables
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -203,6 +205,28 @@ IMPORTANT_POINTS="""
 }
 </guidelines>
 """
+
+class FeatureAnalysisRequest(BaseModel):
+    feature_name: str
+    category: str
+
+@app.post("/feature_analysis")
+# feature analysis
+async def feature_analysis(request: FeatureAnalysisRequest):
+    try:
+        messages = [
+            {"role": "system", "content": feature_analysis_prompt},
+            {"role": "user", "content": f"Here is the feature name: {request.feature_name} and category: {request.category}"}
+        ]
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages=messages,
+        )
+        return JSONResponse(content={"response":extract_json_from_string(response.choices[0].message.content.strip())})
+    except Exception as e:
+        return {"error": "An error occurred while processing your request"}
+
+
 
 @app.post("/workflow_report")
 # workflow report

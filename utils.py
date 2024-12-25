@@ -16,10 +16,10 @@ def extract_json_from_string(string):
             if count == 0:
                 try:
                     json_str = string[start:i+1]
-                    print(f"Extracted JSON: {json_str}")
+                    # print(f"Extracted JSON: {json_str}")
                     return json.loads(json_str)
                 except json.JSONDecodeError as e:
-                    print(f"JSON decode error: {e}")
+                    # print(f"JSON decode error: {e}")
                     return {}
     return {}
 
