@@ -12,6 +12,7 @@ from fastapi.responses import JSONResponse
 from utils import SAMPLE_REPORT
 from prompts import feature_analysis_prompt
 from pydantic import BaseModel
+import context
 # Load environment variables
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -72,6 +73,56 @@ async def compatibility_endpoint(user_profile: dict, product_profile: dict):
         return {"error": "An error occurred while processing your request"}
 
 
+
+proposal_format = """
+{
+  "Proposal": {
+    "Title": "//describe the title of the product customized for the client",
+    "Problems Addressed": [
+      "// list of problems addressed by the product customized for the client"
+    ],
+    "Top Features": [
+      {
+        "Feature": "feature name",
+        "Details": [
+          //describe the feature of the product in 300 words customized for the client
+        ]
+      }, ... more features relevant to the client category team size and industry (3-4 features)
+    ],
+    "Top Functionalities": [
+      //list of top functionalities of the product customized for the client
+    ],
+    "Best Version of Product": "description of the product for the client",
+    "Company Description": "describe the company description of the product customized for the client",
+    "How the Product Can Help": "describe the how the product can help in 300 words customized for the client",
+    "Analysis of Customer Preferences": {
+      "Nature": [
+        //describe the nature of the product in 300 words customized for the client
+      ],
+      "Tech Friendliness": [
+        //describe the tech friendliness of the product in 300 words customized for the client
+      ],
+      "Preferences": [
+        //describe the preferences of the product in 300 words customized for the client
+      ]
+    }
+  }
+}
+"""
+
+@app.post("/proposal")
+async def custom_proposal(client_profile: dict, product_profile: dict):
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": f"You are a legal expert who analyzes legal tools and softwares for legal companies and give custom proposal based on client profile and product profile. the proposal format should be in json. use this format: {proposal_format}"},
+                {"role": "user", "content": f"Here is the product profile: {product_profile} || based on product feature and category get relevant data from these dictionaries: features list: {context.feature_list} ||  sectors and problems by feature category: {context.sectors_problems_by_feature_category} \n \n and give custom proposal based on client profile \n \n client details: {client_profile}"}
+            ],
+        )
+        return {"response":extract_json_from_string(response.choices[0].message.content.strip())}
+    except Exception as e:
+        return {"error": "An error occurred while processing your request"}
 
 
 workflow_report_json = {}

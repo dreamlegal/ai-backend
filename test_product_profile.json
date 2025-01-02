@@ -1,0 +1,355 @@
+{
+    "msg": "All Products fetched successfully",
+    "success": true,
+    "products": [
+        {
+            "id": "cm1aqdwhr000zl8mnwynex34x",
+            "name": "MikeLegal IP Suite",
+            "description": "The MikeIP Suite Ecosystem enables IP lawyers to automate end-to-end IP portfolio-related tasks, using AI technology giving your team greater bandwidth and more billable hours each day.",
+            "slug": "mikelegal-ip-suite",
+            "logoUrl": "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/logos/mXcqGYCMRC1EWtB3U2koPY.jpg",
+            "featured": false,
+            "category": [
+                "Intellectual Property Management"
+            ],
+            "active": "publish",
+            "deployement": [
+                "SaaS"
+            ],
+            "mobileAvailable": "No",
+            "focusCountries": [
+                "India"
+            ],
+            "avgTimeAdoption": "1 days",
+            "languages": [
+                "English"
+            ],
+            "securityCertificate": "SOC II",
+            "integration": [
+                "NOT AVAILABLE"
+            ],
+            "usp": "MikeLegal streamlines trademark management with automation. It handles TM portfolio management, public search, weekly infringement analysis, and uses image recognition to detect similar marks before publication. Plus, you get automated TM status updates, making trademark protection efficient and proactive. A complete solution for trademark monitoring.",
+            "upcomingUpdates": "Stay tuned here for further updates",
+            "userCategory": [
+                "Law firms|25|false",
+                "Government departments|25|false",
+                "Enterprises|25|false",
+                "In-House Counsels|25|false"
+            ],
+            "userCategoryPercentage": [],
+            "industry": [
+                "Neutral|7|true",
+                "Banking and Finance|3|true",
+                "Legal Services Providers|73|true",
+                "Pharmaceutical and Life Sciences|8|true",
+                "Retail and Consumer Goods|2|true",
+                "Real Estate|1|true",
+                "Manufacturing|6|true"
+            ],
+            "industryPercentage": [],
+            "practiceAreas": [
+                "Intellectual Property Law|100|false"
+            ],
+            "practiceAreasPercentage": [],
+            "teamSize": [
+                "21-50|25|false",
+                "51-200|25|false",
+                "201-500|25|false",
+                "500+|25|false"
+            ],
+            "teamsizePercentage": [],
+            "processLifecycle": {
+                "Intellectual Property Management": [
+                    "Cataloging",
+                    "Analysis",
+                    "Protection",
+                    "Monitoring",
+                    "Reporting"
+                ]
+            },
+            "features": {
+                "Common Features": {
+                    "External Collaboration": [
+                        "Messaging and Communication",
+                        "Notification",
+                        "Document sharing"
+                    ],
+                    "Internal Collaboration": [
+                        "Notification"
+                    ],
+                    "Analytics and Reporting": [
+                        "Analytics dashboard",
+                        "Report generation",
+                        "Dashboard Customization",
+                        "Report Customization"
+                    ],
+                    "Tool Administration and Control": [
+                        "Multiple User role",
+                        "Granular Permission"
+                    ]
+                },
+                "Intellectual Property Management": {
+                    "Lifecycle Management": [
+                        "Workflow management system (IP lifecycle)"
+                    ],
+                    "Search and Discovery": [
+                        "Database integration",
+                        "Filter and sorting",
+                        "Advanced search capabilities"
+                    ],
+                    "Ideation and Creation": [],
+                    "Storage and Repository": [
+                        "Centralized repository",
+                        "Categorization and tagging",
+                        "Accessibility control"
+                    ]
+                }
+            },
+            "freeTrial": "Yes",
+            "timePeriod": "30 Days",
+            "freeVersion": "No",
+            "pricingModel": [
+                "Annual Fee",
+                "Volume based"
+            ],
+            "contractPeriod": "6 Months",
+            "nameofPlan": [],
+            "validity": [],
+            "price": [],
+            "pricingParams": [
+                "Based on user size "
+            ],
+            "Demo": [
+                "Self-demo",
+                "Customised prototypes",
+                "Guided walkthrough",
+                "Video demos"
+            ],
+            "support": [
+                "Phone",
+                "Live chat",
+                "Dedicated account manager",
+                "Help ticket"
+            ],
+            "training": [
+                "Video Tutorials",
+                "User Manuals",
+                "On-demand Training"
+            ],
+            "storage": [
+                "1GB  "
+            ],
+            "fileSize": [
+                "100MB  "
+            ],
+            "maintenance": "Free",
+            "reqForChange": "Available",
+            "trainingReq": "Free",
+            "dataMigration": "Free",
+            "Images": [
+                "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/images/jrj4U53noVMKbgKJfQe2zu.png",
+                "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/images/fEvkP4SUphpHQY583P8Nyk.png",
+                "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/images/1HTBmHvyWfWS3bxyW1x7Zs.png",
+                "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/images/8kT6kntnJuRFpHSj4FrhVF.png",
+                "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/images/jTkiHeWzfrtgj75t1xXeTu.png"
+            ],
+            "videoUrl": "https://youtu.be/I-a6q_Iumow?si=A94u5YwxnIanJKsU",
+            "attachments": [],
+            "youtubeUrl": "https://m.youtube.com/@mikelegalservices1305",
+            "linkedinUrl": "https://in.linkedin.com/company/mikelegal",
+            "twitterUrl": "https://twitter.com/mikelegalai",
+            "createdAt": "2024-09-20T13:02:52.863Z",
+            "updatedAt": "2024-09-20T13:04:44.908Z",
+            "user": {
+                "id": "cm164le6u0000vaf5r6hehl1f",
+                "email": "team@mikelegal.com",
+                "name": "company",
+                "createdAt": "2024-09-17T07:41:46.132Z",
+                "password": "Mike@DreamLegal",
+                "updatedAt": "2024-09-17T07:41:46.132Z",
+                "type": "vendor",
+                "skip": false
+            },
+            "company": {
+                "id": "cm1abo922000sl8mn7bjt4dud",
+                "userId": "cm164le6u0000vaf5r6hehl1f",
+                "companyName": "MikeLegal Services Private Limited",
+                "website": "https://mikelegal.com/",
+                "yearFounded": "2017",
+                "headQuaters": "India",
+                "NameOfFounders": "Anshul Gupta and Tushar Bhargava",
+                "contact": "9958915302",
+                "founderVision": "",
+                "regionServed": "",
+                "TeamSize": "20-50",
+                "Awards": "Asia's Leading LegalTech Startup",
+                "PointOfContactName": "Akriti Garg",
+                "PointOfContactPhone": "9899528005",
+                "PointOfContactDesignation": "Head of Content and Communication",
+                "overview": ""
+            },
+            "Review": []
+        },
+        {
+            "id": "cm17fuqds0004126b4ohbwni1",
+            "name": "Legal Buddy CLM",
+            "description": "This true SaaS application offers full organizational control, effortless tracking, and customizable...",
+            "slug": "legal-buddy-clm",
+            "logoUrl": "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/logos/rXgWqLtRscyHzXknkVB8NN.png",
+            "featured": false,
+            "category": [
+                "Contract Lifecycle Management"
+            ],
+            "active": "publish",
+            "deployement": [
+                "Hybrid"
+            ],
+            "mobileAvailable": "No",
+            "focusCountries": [
+                "India",
+                "Philippines",
+                "Indonesia",
+                "Saudi Arabia",
+                "Singapore"
+            ],
+            "avgTimeAdoption": "1 days",
+            "languages": [
+                "English"
+            ],
+            "securityCertificate": "Secure Sockets Layer ( SSL)",
+            "integration": [
+                "Gmail",
+                "Google Calendar",
+                "Google Contacts",
+                "Microsoft OneDrive"
+            ],
+            "usp": "SaaS-based CLM application provides a unique value proposition with complete database control at your chosen DB vendor, customizable emailers, rule-based reviewer decisions, and a signature matrix for contracts. Fully customizable with role-specific access control, it offers unmatched efficiency and security, going live in under 30 minutes for seamless contract management.",
+            "upcomingUpdates": "Personalized LLM model: Next version to have intuitive business prompts, enabling the effortless creation of personalized contracts. Next version to have custom-fitted user personalized guidance to meet organizational objectives. \nIntelligent Chatbot Integration: Next version to have 24/7 virtual assistant to automate routine tasks and answering common questions.",
+            "userCategory": [
+                "Enterprises|100|true",
+                "Startups|0|false"
+            ],
+            "userCategoryPercentage": [],
+            "industry": [
+                "Construction and Engineering|0|true",
+                "Energy and Utilities|0|true",
+                "Manufacturing|0|true",
+                "Media and Entertainment|0|true",
+                "Real Estate|0|true",
+                "Technology and Software|0|true",
+                "Defence|50|true",
+                "Retail and Consumer Goods|50|true"
+            ],
+            "industryPercentage": [],
+            "practiceAreas": [
+                "Contract|100|false"
+            ],
+            "practiceAreasPercentage": [],
+            "teamSize": [
+                "2-20|50|true",
+                "21-50|50|true"
+            ],
+            "teamsizePercentage": [],
+            "processLifecycle": {
+                "Contract Lifecycle Management": [
+                    "Create",
+                    "Authentication",
+                    "Store",
+                    "Execute",
+                    "Tracking"
+                ]
+            },
+            "features": {
+                "Common Features": {
+                    "External Collaboration": [
+                        "Document sharing",
+                        "Messaging and Communication",
+                        "Notification"
+                    ],
+                    "Internal Collaboration": [
+                        "Notification",
+                        "Document sharing"
+                    ],
+                    "Analytics and Reporting": [
+                        "Analytics dashboard",
+                        "Report generation",
+                        "Report Customization"
+                    ],
+                    "Tool Administration and Control": [
+                        "Multiple User role",
+                        "Information access control",
+                        "Granular Permission",
+                        "Role based access control"
+                    ]
+                },
+                "Contract Lifecycle Management": {
+                    "Clause Library": [
+                        "Clause Library",
+                        "Clause review and approval",
+                        "Version control for clauses"
+                    ],
+                    "Contract Repository": [
+                        "Document Storage",
+                        "Categorization and Retrieval",
+                        "Multiple file formats"
+                    ],
+                    "Contract Negotiation": [
+                        "Messaging and Emailing"
+                    ],
+                    "Lifecycle Management": [
+                        "Obligation tracking",
+                        "Approval Management",
+                        "Milestone tracking",
+                        "Calendar Alerts"
+                    ],
+                    "Contract Creation and Authoring": [
+                        "Contract Authoring",
+                        "Contract Templatization",
+                        "Version control"
+                    ]
+                }
+            },
+            "freeTrial": "Yes",
+            "timePeriod": "30",
+            "freeVersion": "No",
+            "pricingModel": [
+                "Annual Fee",
+                "Monthly subscription",
+                "Volume based"
+            ],
+            "contractPeriod": "1",
+            "nameofPlan": [],
+            "validity": [],
+            "price": [],
+            "pricingParams": [
+                "Volume & templates of contract, period based on subscription"
+            ],
+            "Demo": [
+                "Self-demo"
+            ],
+            "support": [
+                "Phone",
+                "Dedicated account manager"
+            ],
+            "training": [
+                "Video Tutorials",
+                "User Manuals"
+            ],
+            "storage": [
+                "1TB"
+            ],
+            "fileSize": [
+                "25MB"
+            ],
+            "maintenance": "Free",
+            "reqForChange": "Available",
+            "trainingReq": "Paid",
+            "dataMigration": "Paid",
+            "Images": [
+                "https://dreamlegal-backend.s3-ap-south-1.amazonaws.com/images/sDTPyE8HEo4wmNkV4TNzPb.png"
+            ],
+            "createdAt": "2024-09-18T12:42:48.615Z",
+            "updatedAt": "2024-09-18T12:42:48.615Z"
+        }
+    ]
+}
