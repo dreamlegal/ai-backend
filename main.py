@@ -1,13 +1,12 @@
-# main.py
 
 import os
 import json
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect,APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import openai
 from compatibility_test import check_compatibility
-from utils import extract_json_from_string  
+from utils import extract_json_from_string
 from fastapi.responses import JSONResponse
 from utils import SAMPLE_REPORT
 from prompts import feature_analysis_prompt
@@ -21,7 +20,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 app = FastAPI()
-
+router = APIRouter()
 # Allow CORS for frontend development
 app.add_middleware(
     CORSMiddleware,
@@ -31,14 +30,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/chat")
+@router.post("/ai/chat")
 async def chat_endpoint(messages: dict):
 
     product_profile = messages['product_profile']
     user_profile = messages['user_profile']
     if not messages or not isinstance(messages, dict):
         return {"error": "Invalid message format. Message must be a non-empty string."}
-    
+
     try:
         # Process the message with OpenAI
         response = await get_openai_response(product_profile, user_profile, messages)
@@ -47,25 +46,25 @@ async def chat_endpoint(messages: dict):
         return JSONResponse(content={"response": response_json})
     except Exception as e:
         return {"error": "An error occurred while processing your message"}
-    
-@app.post("/compatibility")
+
+@router.post("/ai/compatibility")
 async def compatibility_endpoint(user_profile: dict, product_profile: dict):
     # Validate that both profiles are dictionaries
     if not isinstance(user_profile, dict) or not isinstance(product_profile, dict):
         return {"error": "Both user_profile and product_profile must be dictionaries"}
-    
+
     # Validate required fields in user profile
     required_user_fields = ["Location", "CompanyType", "PrimaryLanguage", "Industry", "TeamSize", "Goals"]
     missing_user_fields = [field for field in required_user_fields if field not in user_profile]
     if missing_user_fields:
         return {"error": f"Missing required fields in user_profile: {', '.join(missing_user_fields)}"}
-    
+
     # Validate required fields in product profile
     required_product_fields = ["focusCountries", "languages", "userCategory", "industry", "teamSize"]
     missing_product_fields = [field for field in required_product_fields if field not in product_profile]
     if missing_product_fields:
         return {"error": f"Missing required fields in product_profile: {', '.join(missing_product_fields)}"}
-    
+
     try:
         response = check_compatibility(product_profile, user_profile)
         return {"response": response}
@@ -110,7 +109,7 @@ proposal_format = """
 }
 """
 
-@app.post("/proposal")
+@router.post("/ai/proposal")
 async def custom_proposal(client_profile: dict, product_profile: dict):
     try:
         response = openai.chat.completions.create(
@@ -127,7 +126,7 @@ async def custom_proposal(client_profile: dict, product_profile: dict):
 
 workflow_report_json = {}
 
-IMPORTANT_POINTS="""    
+IMPORTANT_POINTS="""
 <role>Legal Operations Expert</role>
 
 <objective>Analyze the provided workflow report in JSON format and deliver a comprehensive analysis with actionable insights.</objective>
@@ -140,39 +139,39 @@ IMPORTANT_POINTS="""
   * Technical workflow assessment
   * Key performance metrics
   * Resource utilization insights
-  
+
 - Quantitative Analysis
   * Lost opportunities with numerical data
   * Comparative performance metrics
   * Financial impact assessment
-  
+
 - Risk Assessment
   * 2-6 critical red flags with explanations
   * 2-6 positive green flags with evidence
   * 3-7 potential risks with mitigation strategies
-  
-- Optimization Opportunities  
+
+- Optimization Opportunities
   * 2-6 actionable workflow improvements
   * Expected impact metrics
   * Implementation complexity rating
-  
+
 - Strategic Recommendations
   * 4-8 detailed solutions
   * Cost-benefit analysis
   * Priority levels
   * Resource requirements
-  
+
 - Implementation Roadmap
   * 30/60/90 day action plans
   * Key milestones
   * Success criteria
   * Resource allocation
-  
+
 - Performance Tracking
   * 3-7 KPIs with baselines
   * Measurement methodology
   * Target thresholds
-  
+
 - Executive Summary
   * Overall assessment
   * Critical findings
@@ -189,17 +188,17 @@ IMPORTANT_POINTS="""
 - Focus on business impact and ROI
 - The report should be descriptive every heading should have atleast 300 words and subheadings should have atleast 200 words
 - in total the report should be atleast 1500 words
-- IMPORTANT: Create Report in the following json format only :@~Anurag Shakya 
+- IMPORTANT: Create Report in the following json format only :@~Anurag Shakya
 {
   "Current Observation": {
 
-    "heading here ": "content here ",//n number of times as required and  no subheadings 
+    "heading here ": "content here ",//n number of times as required and  no subheadings
 
   },
   "Quantitative Analysis": {
-    "heading here ": "content here ", //n number of times as required and  no subheadings 
-   
-    
+    "heading here ": "content here ", //n number of times as required and  no subheadings
+
+
   },
   "Risk Assessment": {
     "Critical Red Flags": [
@@ -213,8 +212,8 @@ IMPORTANT_POINTS="""
         "Risk": "//content here ",
         "Mitigation": "//content here "
 
-      },// repeat this n number of times as required no strucutal change in way of represeting informaton 
-     
+      },// repeat this n number of times as required no strucutal change in way of represeting informaton
+
     ]
   },
   "Optimization Opportunities": {
@@ -261,7 +260,7 @@ class FeatureAnalysisRequest(BaseModel):
     feature_name: str
     category: str
 
-@app.post("/feature_analysis")
+@router.post("/ai/feature_analysis")
 # feature analysis
 async def feature_analysis(request: FeatureAnalysisRequest):
     try:
@@ -279,7 +278,7 @@ async def feature_analysis(request: FeatureAnalysisRequest):
 
 
 
-@app.post("/workflow_report")
+@router.post("/ai/workflow_report")
 # workflow report
 async def workflow_report(workflow_report: dict):
     try:
@@ -330,10 +329,9 @@ async def get_openai_response(product_profile: dict, user_profile: dict, message
         return answer
     except Exception as e:
         return "Sorry, I couldn't process that."
-    
 
 
-
+app.include_router(router)
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
