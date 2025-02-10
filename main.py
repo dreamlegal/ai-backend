@@ -78,11 +78,34 @@ proposal_format = """
   "Proposal": {
     "Title": "//describe the title of the product customized for the client",
     "Problems Addressed": [
-      "// list of problems addressed by the product customized for the client"
+      "// list of problems addressed by the product customized for the client + how the problem is solved by the product"
     ],
+    "Particular Requirements": [
+      "// how the product is fitting for the client particular requirements in points"
+      "point1",
+      "point2",
+    ],
+    "Why the [product category] is best fit for the client": {
+      "• Competitive edge – Data on how early adopters gains a competitive edge. (gpt) 3 bullets",
+      "• Cost of Inaction – What happens if they don’t invest in legal tech now? (gpt) 3 bullets",
+      "• Success Stories & ROI Predictions – What competitors are achieving with similar tools (gpt) 3 bullets ( based on ROI question – time, cost, KPI)",
+      
+      "CE":[
+        //3 bullets
+      ],
+      "COI":[
+        //3 bullets
+      ],
+      "ROI":[
+        //3 bullets
+      ]
+
+    },
+
     "Top Features": [
       {
         "Feature": "feature name",
+
         "Details": [
           //describe the feature of the product in 300 words customized for the client
         ]
@@ -104,10 +127,20 @@ proposal_format = """
       "Preferences": [
         //describe the preferences of the product in 300 words customized for the client
       ]
-    }
+    },
+    "Testimonials": [
+      {
+        "Name": "//name of the testimonial",
+        "Designation": "//designation of the testimonial",
+        "Organization": "//organization of the testimonial",
+        "Message": "//message of the testimonial"
+      }, ... more testimonials
+    ],
+    "About the company": "//describe the about the company in 300 words customized for the client"
   }
 }
 """
+
 
 @router.post("/ai/proposal")
 async def custom_proposal(client_profile: dict, product_profile: dict):
@@ -122,6 +155,46 @@ async def custom_proposal(client_profile: dict, product_profile: dict):
         return {"response":extract_json_from_string(response.choices[0].message.content.strip())}
     except Exception as e:
         return {"error": "An error occurred while processing your request"}
+
+
+
+
+
+
+
+
+# @router.post("/ai/proposal")
+# async def custom_proposal(client_profile:dict,vendor_profile:dict):
+#   """
+#   Client Profile
+#   # Client Sector
+#   # Client Team Size
+#   # Client Problems
+#   # Client Particular Requirements
+  
+#   Vendor Profile
+#   ROI
+#     Time (para)
+#     Cost (para)
+#     KPI (para)
+
+#   Testimonials
+#     Name
+#     Designation
+#     Organization
+#     Message
+#   About the company (para)
+#   """
+
+
+
+
+
+
+
+
+
+
 
 
 workflow_report_json = {}
@@ -250,7 +323,7 @@ IMPORTANT_POINTS="""
   "Executive Summary": {
     "Overall Assessment": "//content here .",
     "Critical Findings": "//content here .",
-    "Strategic Direction": "//content here ."
+    "Strategic Direction": "//content here 
   }
 }
 </guidelines>

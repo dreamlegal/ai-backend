@@ -20,6 +20,7 @@ feature_analysis_prompt = """
 {"Feature list":"Storage","Top sectors":"Banking, Technology, Pharmaceuticals, Legal Services, Government","Top problem statememts":"Ensures encrypted data storage, Provides automated recovery, Maintains audit trails, Enhances searchability, Secures role-based access."}
 
 
+
 1.	Description of feature
 (short para)
 2.	Overall scalability comment
