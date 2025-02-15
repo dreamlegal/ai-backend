@@ -13,9 +13,10 @@ from prompts import feature_analysis_prompt
 from pydantic import BaseModel
 import context
 # Load environment variables
-load_dotenv()
+load_dotenv(".env")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+print(OPENAI_API_KEY)
 # Initialize OpenAI
 openai.api_key = OPENAI_API_KEY
 
@@ -97,11 +98,14 @@ proposal_format = """
         //3 bullets
       ],
       "ROI":[
-        //3 bullets
+        //please specify the roi in point of time,cost, kpi and more descriptive.
       ]
 
     },
-
+    "Product Overview":"overview of the product in 300 words customized for the client",
+    "Pain Points": [
+      //list of pain points of the product solving customized for the client
+    ],
     "Top Features": [
       {
         "Feature": "feature name",
@@ -112,10 +116,20 @@ proposal_format = """
       }, ... more features relevant to the client category team size and industry (3-4 features)
     ],
     "Top Functionalities": [
-      //list of top functionalities of the product customized for the client
+      //list of top functionalities of the product customized for the client and  Need bulleted features under the heads of functionalities from the feature_list
+      {
+        "functionality": "functionality name",
+        "features": [
+        //feature1
+        //feature2
+        //...
+        ]
+      }, ... more functionalities relevant to the client category team size and industry (3-4 features)
     ],
-    "Best Version of Product": "description of the product for the client",
-    "Company Description": "describe the company description of the product customized for the client",
+    "Best Version of Product": [
+      "//Need bullets,  Ideal clients, company size, industry",
+    ],
+    "Company Description": "describe the company description of the product customized for the client To be taken from the response by vendor, and sequence - after testimonials",
     "How the Product Can Help": "describe the how the product can help in 300 words customized for the client",
     "Analysis of Customer Preferences": {
       "Nature": [
@@ -133,7 +147,7 @@ proposal_format = """
         "Name": "//name of the testimonial",
         "Designation": "//designation of the testimonial",
         "Organization": "//organization of the testimonial",
-        "Message": "//message of the testimonial"
+        "Message": "//message of the testimonial more descriptive"
       }, ... more testimonials
     ],
     "About the company": "//describe the about the company in 300 words customized for the client"
@@ -143,17 +157,18 @@ proposal_format = """
 
 
 @router.post("/ai/proposal")
-async def custom_proposal(client_profile: dict, product_profile: dict):
+async def custom_proposal(client_profile: dict, product_profile: dict,vendor_information:dict):
     try:
         response = openai.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": f"You are a legal expert who analyzes legal tools and softwares for legal companies and give custom proposal based on client profile and product profile. the proposal format should be in json. use this format: {proposal_format}"},
-                {"role": "user", "content": f"Here is the product profile: {product_profile} || based on product feature and category get relevant data from these dictionaries: features list: {context.feature_list} ||  sectors and problems by feature category: {context.sectors_problems_by_feature_category} \n \n and give custom proposal based on client profile \n \n client details: {client_profile}"}
+                {"role": "user", "content": f"Here is the product profile: {product_profile} || based on product feature and category get relevant data from these dictionaries: features list: {context.feature_list} ||  sectors and problems by feature category: {context.sectors_problems_by_feature_category} \n \n and give custom proposal based on client profile \n \n client details: {client_profile} \n \n vendor information: {vendor_information}"}
             ],
         )
         return {"response":extract_json_from_string(response.choices[0].message.content.strip())}
     except Exception as e:
+        print(e)
         return {"error": "An error occurred while processing your request"}
 
 
@@ -185,15 +200,6 @@ async def custom_proposal(client_profile: dict, product_profile: dict):
 #     Message
 #   About the company (para)
 #   """
-
-
-
-
-
-
-
-
-
 
 
 
