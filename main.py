@@ -116,7 +116,8 @@ proposal_format = """
       }, ... more features relevant to the client category team size and industry (3-4 features)
     ],
     "Top Functionalities": [
-      //list of top functionalities of the product customized for the client and  Need bulleted features under the heads of functionalities from the feature_list
+      //list of top functionalities of the product from only product category, customized for the client and  Need bulleted features under the heads of functionalities from the feature_list
+      //do not alter the functionality name and features name
       {
         "functionality": "functionality name",
         "features": [
@@ -127,7 +128,7 @@ proposal_format = """
       }, ... more functionalities relevant to the client category team size and industry (3-4 features)
     ],
     "Best Version of Product": [
-      "//Need bullets,  Ideal clients, company size, industry",
+      "//Please specify in points ,  Ideal clients, company size, industry",
     ],
     "Company Description": "describe the company description of the product customized for the client To be taken from the response by vendor, and sequence - after testimonials",
     "How the Product Can Help": "describe the how the product can help in 300 words customized for the client",
